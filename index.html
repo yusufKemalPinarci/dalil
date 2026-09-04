@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="tr" data-lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Dalil Mermer — Tasarım Önerisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F4F0; --bg-2:#FFFFFF; --bg-3:#ECE7DF;
+  --ink:#191C1A; --ink-2:#464B47; --ink-3:#787E79;
+  --line:#D9D3C8; --line-2:#C2BAAC;
+  --accent:#2F6B4F; --accent-2:#3F8A67; --accent-soft:#E3EDE6;
+  --gold:#9C7B3F;
+  --ok:#2F6B4F; --ok-bg:#E3EDE6;
+  --warn:#8A5A22; --warn-bg:#F6EBDB;
+  --ph:#9C7B3F; --ph-bg:#FBF4E6; --ph-line:#D9BE86;
+  --shadow:0 1px 2px rgba(25,28,26,.05),0 8px 28px rgba(25,28,26,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101210; --bg-2:#181B19; --bg-3:#1F2320;
+    --ink:#EDF0EC; --ink-2:#B3BAB4; --ink-3:#828A84;
+    --line:#2A2F2B; --line-2:#3A403B;
+    --accent:#63B98C; --accent-2:#7FD0A4; --accent-soft:#16251D;
+    --gold:#D2AC69;
+    --ok:#7FD0A4; --ok-bg:#16251D;
+    --warn:#DDA765; --warn-bg:#2A2115;
+    --ph:#D2AC69; --ph-bg:#251E12; --ph-line:#4A3B21;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101210; --bg-2:#181B19; --bg-3:#1F2320;
+  --ink:#EDF0EC; --ink-2:#B3BAB4; --ink-3:#828A84;
+  --line:#2A2F2B; --line-2:#3A403B;
+  --accent:#63B98C; --accent-2:#7FD0A4; --accent-soft:#16251D;
+  --gold:#D2AC69;
+  --ok:#7FD0A4; --ok-bg:#16251D;
+  --warn:#DDA765; --warn-bg:#2A2115;
+  --ph:#D2AC69; --ph-bg:#251E12; --ph-line:#4A3B21;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* three-language switching — no blanket hide */
+[data-lang="tr"] .en,[data-lang="tr"] .ar{display:none}
+[data-lang="en"] .tr,[data-lang="en"] .ar{display:none}
+[data-lang="ar"] .tr,[data-lang="ar"] .en{display:none}
+[data-lang="ar"] body,[data-lang="ar"]{font-family:"IBM Plex Sans Arabic",Inter,sans-serif}
+[dir="rtl"] .nav .wrap,[dir="rtl"] .hero-cta,[dir="rtl"] .prop .wrap{direction:rtl}
+[dir="rtl"] ul.ticks li{padding-left:0;padding-right:26px}
+[dir="rtl"] ul.ticks li:before{left:auto;right:0}
+[dir="rtl"] th,[dir="rtl"] td{text-align:right}
+[dir="rtl"] .verdict{border-left:0;border-right:3px solid}
+
+img{max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.15;margin:0}
+[data-lang="ar"] h1,[data-lang="ar"] h2,[data-lang="ar"] h3{font-family:"IBM Plex Sans Arabic",serif;font-weight:500}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;font-family:Inter,sans-serif}
+
+.prop{background:var(--ink);color:var(--bg);position:sticky;top:0;z-index:60;font-size:12.5px;line-height:1.45}
+.prop .wrap{display:flex;gap:12px;align-items:center;justify-content:center;padding:9px 24px;text-align:center;flex-wrap:wrap}
+.prop b{color:var(--gold)}
+
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;padding:14px 24px;justify-content:space-between}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand .b1{font-family:"Cormorant Garamond",serif;font-size:23px;letter-spacing:.02em}
+.brand .b2{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.navlinks{display:flex;gap:20px;font-size:13.5px;font-weight:500}
+.navlinks a{color:var(--ink-2);white-space:nowrap}
+.navlinks a:hover{color:var(--accent);text-decoration:none}
+@media(max-width:1080px){.navlinks{gap:14px;font-size:12.5px}}
+@media(max-width:900px){.navlinks{display:none}}
+@media(max-width:400px){.brand .b1{font-size:19px}.nav .wrap{padding:12px 18px;gap:10px}.wrap{padding:0 18px}}
+.navtools{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink);
+  padding:8px 14px;border-radius:2px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:.15s}
+.btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.btn-p{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-p:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
+:root[data-theme="dark"] .btn-p{color:#0E1A13}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-p{color:#0E1A13}}
+
+.hero{padding:84px 0 70px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;
+  background:radial-gradient(1000px 360px at 80% -14%,var(--accent-soft),transparent 62%),
+             linear-gradient(178deg,transparent 62%,var(--bg-3) 100%);
+  opacity:.9;pointer-events:none}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(36px,6vw,70px);max-width:17ch;margin:16px 0 0}
+.hero h1 em{font-style:italic;color:var(--accent)}
+[data-lang="ar"] .hero h1 em{font-style:normal}
+.lede{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:62ch;margin:22px 0 0;font-weight:300}
+.hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+
+section{padding:74px 0;border-bottom:1px solid var(--line)}
+.sec-head{max-width:66ch;margin-bottom:38px}
+.sec-head h2{font-size:clamp(28px,4vw,42px);margin:12px 0 0}
+.sec-head p{color:var(--ink-2);margin:14px 0 0;font-weight:300;font-size:17px}
+
+/* placeholder marker */
+.ph{border:1px dashed var(--ph-line);background:var(--ph-bg);color:var(--ph);
+  padding:14px 16px;font-size:13px;line-height:1.55;border-radius:2px}
+.ph b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.prod{background:var(--bg-2);border:1px solid var(--line);overflow:hidden;transition:.18s}
+.prod:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.swatch{height:110px}
+.prod .pb{padding:15px 17px 17px}
+.prod h3{font-size:19px}
+.prod .ptype{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-top:5px}
+
+.calc{background:var(--bg-2);border:1px solid var(--line);box-shadow:var(--shadow)}
+.calc-head{padding:24px 26px;border-bottom:1px solid var(--line);background:var(--bg-3)}
+.calc-head h3{font-size:26px}
+.calc-head p{margin:8px 0 0;font-size:14px;color:var(--ink-2)}
+.calc-body{display:grid;grid-template-columns:minmax(280px,340px) 1fr}
+@media(max-width:820px){.calc-body{grid-template-columns:1fr}}
+.calc-in{padding:26px;border-right:1px solid var(--line)}
+[dir="rtl"] .calc-in{border-right:0;border-left:1px solid var(--line)}
+@media(max-width:820px){.calc-in{border-right:0;border-left:0;border-bottom:1px solid var(--line)}}
+.f{margin-bottom:18px}
+.f label{display:block;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+.f input,.f select,.f textarea{width:100%;padding:11px 13px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink);
+  border-radius:2px;font-size:15px;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.f select,.f textarea{font-family:Inter,sans-serif}
+.f textarea{min-height:96px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
+.hint{font-size:11.5px;color:var(--ink-3);margin-top:6px;line-height:1.5}
+.calc-out{padding:26px;display:flex;flex-direction:column;gap:16px}
+.oc{border:1px solid var(--line);padding:18px 20px;background:var(--bg)}
+.oc .ol{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.oc .ov{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:500;margin-top:6px;line-height:1.1;font-variant-numeric:tabular-nums}
+.oc .od{font-size:12.5px;color:var(--ink-2);margin-top:7px}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.ogrid{grid-template-columns:1fr}}
+.verdict{padding:16px 20px;border-left:3px solid;font-size:14px;line-height:1.6}
+.verdict.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.verdict.warn{background:var(--warn-bg);border-color:var(--warn);color:var(--warn)}
+.verdict b{display:block;font-size:15px;margin-bottom:3px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.card{background:var(--bg-2);border:1px solid var(--line);padding:26px}
+.card h3{font-size:22px}
+.card p{font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.card .num{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--accent);line-height:1}
+ul.ticks{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:11px}
+ul.ticks li{padding-left:26px;position:relative;color:var(--ink-2);font-size:15px}
+ul.ticks li:before{content:"";position:absolute;left:0;top:9px;width:11px;height:1px;background:var(--accent)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:52px}
+@media(max-width:860px){.split{grid-template-columns:1fr;gap:34px}}
+.form{background:var(--bg-2);border:1px solid var(--line);padding:30px;box-shadow:var(--shadow)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.fg{grid-template-columns:1fr}}
+.notice{font-size:12.5px;color:var(--ink-3);margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+footer{padding:54px 0 38px;background:var(--bg-3)}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
+@media(max-width:780px){.fcols{grid-template-columns:1fr;gap:24px}}
+footer h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px;font-weight:700}
+footer p{margin:0 0 7px;font-size:14px;color:var(--ink-2)}
+.credit{margin-top:38px;padding-top:22px;border-top:1px solid var(--line-2);font-size:13px;color:var(--ink-3);text-align:center}
+.credit p{margin:5px 0;text-align:center;font-size:13px}
+.credit strong{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="prop">
+  <div class="wrap">
+    <span class="tr"><b>TASARIM ÖNERİSİ</b> — Bu sayfa Dalil Mermer için hazırlanmış bir öneridir, firmanın resmî web sitesi <b>değildir</b>. İçerik örnektir ve firma tarafından doldurulacaktır.</span>
+    <span class="en"><b>DESIGN PROPOSAL</b> — This page is a proposal prepared for Dalil Mermer. It is <b>not</b> the company's official website. Content is placeholder and to be filled by the company.</span>
+    <span class="ar"><b>مقترح تصميم</b> — هذه الصفحة مقترح أُعِدَّ لشركة دليل مرمر، وهي <b>ليست</b> الموقع الرسمي للشركة. المحتوى تجريبي وسيُستكمل من قبل الشركة.</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <span class="b1 tr">Dalil Mermer</span>
+      <span class="b1 en">Dalil Marble</span>
+      <span class="b1 ar">دليل مرمر</span>
+      <span class="b2 tr">İzmir · Türk Doğaltaşı</span>
+      <span class="b2 en">İzmir · Turkish Natural Stone</span>
+      <span class="b2 ar">إزمير · الحجر الطبيعي التركي</span>
+    </div>
+    <div class="navlinks">
+      <a href="#urunler"><span class="tr">Ürünler</span><span class="en">Products</span><span class="ar">المنتجات</span></a>
+      <a href="#hesap"><span class="tr">Sevkiyat Hesabı</span><span class="en">Shipping Calculator</span><span class="ar">حاسبة الشحن</span></a>
+      <a href="#surec"><span class="tr">Süreç</span><span class="en">Process</span><span class="ar">آلية العمل</span></a>
+      <a href="#teklif"><span class="tr">Teklif</span><span class="en">Get a Quote</span><span class="ar">طلب عرض سعر</span></a>
+    </div>
+    <div class="navtools">
+      <button class="btn" id="lang">EN</button>
+      <button class="btn" id="theme" aria-label="Tema">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow tr">İzmir · Türkiye</div>
+    <div class="eyebrow en">İzmir · Türkiye</div>
+    <div class="eyebrow ar">إزمير · تركيا</div>
+    <h1 class="tr">Türk mermeri, <em>doğrudan üreticiden.</em></h1>
+    <h1 class="en">Turkish marble, <em>direct from the producer.</em></h1>
+    <h1 class="ar">رخام تركي، <em>مباشرة من المنتج.</em></h1>
+    <p class="lede tr">İzmir'den blok, plaka ve ebatlı mermer tedariki. Küçük ölçekli işlerden büyük mühendislik projelerine kadar doğrudan sevkiyat.</p>
+    <p class="lede en">Blocks, slabs and cut-to-size marble supplied from İzmir. Direct shipment for everything from small orders to large engineering projects.</p>
+    <p class="lede ar">توريد الكتل والألواح والرخام المقصوص حسب المقاس من إزمير. شحن مباشر من الطلبات الصغيرة إلى المشاريع الهندسية الكبيرة.</p>
+    <div class="hero-cta">
+      <a class="btn btn-p" href="#teklif"><span class="tr">Teklif alın</span><span class="en">Request a quote</span><span class="ar">اطلب عرض سعر</span></a>
+      <a class="btn" href="#hesap"><span class="tr">Konteyner hesabı</span><span class="en">Container calculator</span><span class="ar">حاسبة الحاويات</span></a>
+    </div>
+  </div>
+</header>
+
+<section id="urunler">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow tr">Ürünler</div><div class="eyebrow en">Products</div><div class="eyebrow ar">المنتجات</div>
+      <h2 class="tr">Seleksiyonlarınız burada listelenir</h2>
+      <h2 class="en">Your selections are listed here</h2>
+      <h2 class="ar">تُعرض أصنافكم هنا</h2>
+      <p class="tr">Aşağıdaki kartlar <strong>yerleşimi göstermek içindir</strong>. Gerçek seleksiyon adlarınız, fotoğraflarınız ve ebatlarınızla değiştirilecektir.</p>
+      <p class="en">The cards below <strong>demonstrate the layout only</strong>. They will be replaced with your actual selection names, photographs and sizes.</p>
+      <p class="ar">البطاقات أدناه <strong>لعرض التنسيق فقط</strong>، وسيتم استبدالها بأسماء أصنافكم وصوركم ومقاساتكم الفعلية.</p>
+    </div>
+
+    <div class="ph" style="margin-bottom:22px">
+      <b class="tr">Doldurulacak alan</b><b class="en">To be filled</b><b class="ar">حقل قيد الاستكمال</b>
+      <span class="tr">Sattığınız seleksiyonların adlarını ve birer fotoğrafını gönderin, bu bölümü gerçek ürünlerinizle kuralım. Mermer alıcısı ürünü görmeden almaz — bu sayfadaki en önemli bölüm burasıdır.</span>
+      <span class="en">Send us the names and one photograph of each selection you sell and we will build this section with your real products. Marble buyers do not buy what they cannot see — this is the most important section on the page.</span>
+      <span class="ar">أرسلوا أسماء الأصناف التي تبيعونها وصورة لكل صنف، وسنبني هذا القسم بمنتجاتكم الحقيقية. لا يشتري تاجر الرخام ما لا يراه — وهذا أهم قسم في الصفحة.</span>
+    </div>
+
+    <div class="prods" id="prodgrid"></div>
+  </div>
+</section>
+
+<section id="hesap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow tr">Alıcı Aracı</div><div class="eyebrow en">Buyer Tool</div><div class="eyebrow ar">أداة للمشتري</div>
+      <h2 class="tr">Sevkiyat ve blok ihtiyacı hesaplayıcı</h2>
+      <h2 class="en">Shipping &amp; block requirement calculator</h2>
+      <h2 class="ar">حاسبة الشحن واحتياج الكتل</h2>
+      <p class="tr">Mermer hacimle değil <strong>ağırlıkla</strong> sevk edilir — konteyner dolmadan ağırlık sınırına ulaşır. Alıcının ilk sorduğu soru budur; sitenizde cevabı hazır dursun.</p>
+      <p class="en">Marble ships by <strong>weight</strong>, not volume — a container hits its payload limit before it is full. This is the first question a buyer asks; let your site answer it.</p>
+      <p class="ar">يُشحن الرخام بالوزن لا بالحجم — إذ تبلغ الحاوية حد الحمولة قبل أن تمتلئ. هذا أول سؤال يطرحه المشتري، فليكن الجواب جاهزاً في موقعكم.</p>
+    </div>
+
+    <div class="calc">
+      <div class="calc-head">
+        <h3 class="tr">20' konteyner planlayıcı</h3>
+        <h3 class="en">20' container planner</h3>
+        <h3 class="ar">مخطط الحاوية 20 قدم</h3>
+        <p class="tr">Değerleri değiştirin, sonuç anında güncellenir.</p>
+        <p class="en">Change the values — results update instantly.</p>
+        <p class="ar">غيّروا القيم لتتحدث النتائج فوراً.</p>
+      </div>
+      <div class="calc-body">
+        <div class="calc-in">
+          <div class="f">
+            <label class="tr" for="mat">Malzeme</label><label class="en" for="mat">Material</label><label class="ar" for="mat">المادة</label>
+            <select id="mat">
+              <option value="2.70" data-tr="Mermer (2,70 t/m³)" data-en="Marble (2.70 t/m³)" data-ar="رخام (2.70 طن/م³)">Mermer (2,70 t/m³)</option>
+              <option value="2.45" data-tr="Traverten (2,45 t/m³)" data-en="Travertine (2.45 t/m³)" data-ar="ترافرتين (2.45 طن/م³)">Traverten (2,45 t/m³)</option>
+            </select>
+          </div>
+          <div class="f">
+            <label class="tr" for="th">Plaka kalınlığı (cm)</label><label class="en" for="th">Slab thickness (cm)</label><label class="ar" for="th">سماكة اللوح (سم)</label>
+            <input id="th" type="number" value="2" min="0.8" max="12" step="0.1">
+          </div>
+          <div class="f">
+            <label class="tr" for="qty">Sipariş miktarı (m²)</label><label class="en" for="qty">Order quantity (m²)</label><label class="ar" for="qty">كمية الطلب (م²)</label>
+            <input id="qty" type="number" value="1000" min="1" step="10">
+          </div>
+          <div class="f">
+            <label class="tr" for="pay">Konteyner net yük sınırı (ton)</label><label class="en" for="pay">Container payload limit (t)</label><label class="ar" for="pay">حد حمولة الحاوية (طن)</label>
+            <input id="pay" type="number" value="27" min="10" max="30" step="0.5">
+            <div class="hint tr">20' konteynerde tipik sınır 27–28 ton. Varış ülkesindeki karayolu mevzuatı daha düşük olabilir.</div>
+            <div class="hint en">Typical limit for a 20' container is 27–28 t. Road rules at destination may be lower.</div>
+            <div class="hint ar">الحد المعتاد للحاوية 20 قدم هو 27–28 طناً، وقد تكون أنظمة الطرق في بلد الوصول أقل.</div>
+          </div>
+        </div>
+        <div class="calc-out">
+          <div class="ogrid">
+            <div class="oc">
+              <div class="ol tr">Birim ağırlık</div><div class="ol en">Unit weight</div><div class="ol ar">الوزن للوحدة</div>
+              <div class="ov" id="o-kg">—</div>
+              <div class="od">kg / m²</div>
+            </div>
+            <div class="oc">
+              <div class="ol tr">Toplam ağırlık</div><div class="ol en">Total weight</div><div class="ol ar">الوزن الإجمالي</div>
+              <div class="ov" id="o-ton">—</div>
+              <div class="od tr">ton (ambalaj dahil)</div><div class="od en">tonnes (incl. packing)</div><div class="od ar">طن (شامل التغليف)</div>
+            </div>
+            <div class="oc">
+              <div class="ol tr">Konteyner sayısı</div><div class="ol en">Containers</div><div class="ol ar">عدد الحاويات</div>
+              <div class="ov" id="o-cnt">—</div>
+              <div class="od tr">× 20' konteyner</div><div class="od en">× 20' container</div><div class="od ar">× حاوية 20 قدم</div>
+            </div>
+            <div class="oc">
+              <div class="ol tr">Gereken blok</div><div class="ol en">Block required</div><div class="ol ar">الكتل المطلوبة</div>
+              <div class="ov" id="o-blk">—</div>
+              <div class="od tr">m³ ham blok</div><div class="od en">m³ raw block</div><div class="od ar">م³ كتلة خام</div>
+            </div>
+          </div>
+          <div class="verdict" id="o-verdict"></div>
+          <div class="hint tr">Yöntem: birim ağırlık = kalınlık × yoğunluk. Ambalaj için %8 pay eklenir. Blok verimi 5 mm katrak kesme payı ve %85 kullanılabilir verim varsayımıyla hesaplanır. Bağlayıcı teklif değildir.</div>
+          <div class="hint en">Method: unit weight = thickness × density. An 8% allowance is added for crating. Block yield assumes a 5 mm gangsaw kerf and 85% usable recovery. Not a binding quotation.</div>
+          <div class="hint ar">الطريقة: وزن الوحدة = السماكة × الكثافة، مع إضافة 8% للتغليف. يُحتسب مردود الكتلة بفرض عرض قطع 5 مم ومردود صالح للاستخدام 85%. هذه ليست عرض سعر ملزم.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="surec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow tr">Süreç</div><div class="eyebrow en">Process</div><div class="eyebrow ar">آلية العمل</div>
+      <h2 class="tr">Talepten konteynere dört adım</h2>
+      <h2 class="en">Four steps from enquiry to container</h2>
+      <h2 class="ar">أربع خطوات من الطلب إلى الحاوية</h2>
+      <p class="tr">Yurt dışındaki alıcının en çok merak ettiği şey sürecin nasıl işlediğidir. Bu bölüm bunu anlatır.</p>
+      <p class="en">What an overseas buyer most wants to know is how the process works. This section explains it.</p>
+      <p class="ar">أكثر ما يودّ المشتري في الخارج معرفته هو كيفية سير العملية، وهذا ما يوضحه هذا القسم.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="num">01</div>
+        <h3 class="tr">Talep</h3><h3 class="en">Enquiry</h3><h3 class="ar">الطلب</h3>
+        <p class="tr">Seleksiyon, ebat, yüzey ve miktarı iletin. Aynı gün içinde dönüş yapılır.</p>
+        <p class="en">Send selection, size, finish and quantity. You get a reply the same day.</p>
+        <p class="ar">أرسلوا الصنف والمقاس والتشطيب والكمية، ويأتيكم الرد في اليوم نفسه.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3 class="tr">Numune ve fotoğraf</h3><h3 class="en">Sample &amp; photos</h3><h3 class="ar">العينة والصور</h3>
+        <p class="tr">Seçilen partinin fotoğrafı paylaşılır, talep hâlinde numune gönderilir.</p>
+        <p class="en">Photographs of the selected batch are shared; samples are sent on request.</p>
+        <p class="ar">تُشارَك صور الدفعة المختارة، وتُرسَل عينات عند الطلب.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3 class="tr">Üretim ve paketleme</h3><h3 class="en">Production &amp; packing</h3><h3 class="ar">الإنتاج والتغليف</h3>
+        <p class="tr">Ebatlama ve yüzey işlemi tamamlanır, ahşap sandıklara paketlenir.</p>
+        <p class="en">Sizing and surface finishing are completed, then packed into timber crates.</p>
+        <p class="ar">يُستكمل التقصيص والتشطيب، ثم يُعبَّأ في صناديق خشبية.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3 class="tr">Sevkiyat</h3><h3 class="en">Shipment</h3><h3 class="ar">الشحن</h3>
+        <p class="tr">İzmir limanından yükleme ve evrak süreci. Teslim şekli talebe göre belirlenir.</p>
+        <p class="en">Loading and documentation from İzmir port. Delivery terms agreed per order.</p>
+        <p class="ar">التحميل وإجراءات المستندات من ميناء إزمير، وتُحدَّد شروط التسليم حسب الطلب.</p>
+      </div>
+    </div>
+
+    <div class="ph" style="margin-top:26px">
+      <b class="tr">Doldurulacak alan</b><b class="en">To be filled</b><b class="ar">حقل قيد الاستكمال</b>
+      <span class="tr">Kapasiteniz, aylık üretim miktarınız, kaç ülkeye ihracat yaptığınız, ocak veya fabrika bilgileriniz ve varsa belgeleriniz bu sayfaya eklenecek. Bu bilgileri bana iletin, ben yerleştireyim — <strong>hiçbirini kendim uydurmadım.</strong></span>
+      <span class="en">Your capacity, monthly output, the countries you export to, quarry or factory details and any certificates will be added to this page. Send them to me and I will place them — <strong>I have invented none of these figures.</strong></span>
+      <span class="ar">ستُضاف إلى هذه الصفحة طاقتكم الإنتاجية والإنتاج الشهري والدول التي تصدّرون إليها وبيانات المحجر أو المصنع والشهادات إن وُجدت. أرسلوها لي لأضعها في مكانها — <strong>ولم أختلق أياً من هذه الأرقام.</strong></span>
+    </div>
+  </div>
+</section>
+
+<section id="teklif">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow tr">Teklif Talebi</div><div class="eyebrow en">Request for Quotation</div><div class="eyebrow ar">طلب عرض سعر</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);margin-top:12px" class="tr">Ne kadar ve ne zaman?</h2>
+        <h2 style="font-size:clamp(28px,4vw,42px);margin-top:12px" class="en">How much, and by when?</h2>
+        <h2 style="font-size:clamp(28px,4vw,42px);margin-top:12px" class="ar">ما الكمية ومتى؟</h2>
+        <p style="color:var(--ink-2);margin-top:16px;font-weight:300;font-size:17px" class="tr">Seleksiyon, ebat, yüzey ve miktarı bildirin; stok ve termin bilgisiyle dönelim.</p>
+        <p style="color:var(--ink-2);margin-top:16px;font-weight:300;font-size:17px" class="en">Tell us selection, size, finish and quantity — we will come back with stock and lead time.</p>
+        <p style="color:var(--ink-2);margin-top:16px;font-weight:300;font-size:17px" class="ar">أخبرونا بالصنف والمقاس والتشطيب والكمية، ونعود إليكم بالتوافر ومدة التسليم.</p>
+
+        <div class="ph" style="margin-top:30px">
+          <b class="tr">Doldurulacak alan</b><b class="en">To be filled</b><b class="ar">حقل قيد الاستكمال</b>
+          <span class="tr">Adres, telefon, WhatsApp ve e-posta bilgileriniz buraya gelecek. Elimde yalnızca İzmir/Konak ve Facebook sayfanız var; doğru iletişim bilgilerini siz verin.</span>
+          <span class="en">Your address, phone, WhatsApp and e-mail will go here. All I have is İzmir/Konak and your Facebook page — please supply the correct details.</span>
+          <span class="ar">ستوضع هنا بيانات العنوان والهاتف والواتساب والبريد الإلكتروني. لا يتوفر لديّ سوى إزمير/كوناك وصفحتكم على فيسبوك، فيرجى تزويدي بالبيانات الصحيحة.</span>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="fg">
+          <div class="f">
+            <label class="tr" for="q1">Firma</label><label class="en" for="q1">Company</label><label class="ar" for="q1">الشركة</label>
+            <input id="q1" type="text" placeholder="—">
+          </div>
+          <div class="f">
+            <label class="tr" for="q2">Ülke</label><label class="en" for="q2">Country</label><label class="ar" for="q2">الدولة</label>
+            <input id="q2" type="text" placeholder="—">
+          </div>
+          <div class="f">
+            <label class="tr" for="q3">E-posta</label><label class="en" for="q3">E-mail</label><label class="ar" for="q3">البريد الإلكتروني</label>
+            <input id="q3" type="email" placeholder="—">
+          </div>
+          <div class="f">
+            <label class="tr" for="q4">Ürün</label><label class="en" for="q4">Product</label><label class="ar" for="q4">المنتج</label>
+            <select id="q4"></select>
+          </div>
+          <div class="f">
+            <label class="tr" for="q5">Ebat / kalınlık</label><label class="en" for="q5">Size / thickness</label><label class="ar" for="q5">المقاس / السماكة</label>
+            <input id="q5" type="text" placeholder="60×30×2 cm">
+          </div>
+          <div class="f">
+            <label class="tr" for="q6">Miktar</label><label class="en" for="q6">Quantity</label><label class="ar" for="q6">الكمية</label>
+            <input id="q6" type="text" placeholder="1.000 m²">
+          </div>
+        </div>
+        <div class="f">
+          <label class="tr" for="q7">Yüzey, termin ve teslim şekli</label>
+          <label class="en" for="q7">Finish, deadline and delivery terms</label>
+          <label class="ar" for="q7">التشطيب والموعد وشروط التسليم</label>
+          <textarea id="q7" placeholder="—"></textarea>
+        </div>
+        <button class="btn btn-p" style="width:100%;justify-content:center;padding:13px" id="send">
+          <span class="tr">Teklif talebini gönder</span><span class="en">Send request</span><span class="ar">إرسال الطلب</span>
+        </button>
+        <div class="notice tr">Bu form <strong>tasarım önerisinde çalışmamaktadır</strong>, bilerek pasif bırakılmıştır. Canlı sürümde talep e-posta ve WhatsApp'a düşer.</div>
+        <div class="notice en">This form is <strong>intentionally inactive</strong> in the proposal. In the live version, requests arrive by e-mail and WhatsApp.</div>
+        <div class="notice ar">هذا النموذج <strong>معطّل عمداً</strong> في المقترح. في النسخة الفعلية تصل الطلبات عبر البريد الإلكتروني والواتساب.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <div class="brand" style="margin-bottom:14px">
+          <span class="b1 tr">Dalil Mermer</span><span class="b1 en">Dalil Marble</span><span class="b1 ar">دليل مرمر</span>
+          <span class="b2">San. Tic. Ltd. Şti.</span>
+        </div>
+        <p class="tr">Türk doğaltaşı üretimi ve ihracatı. İzmir, Türkiye.</p>
+        <p class="en">Turkish natural stone production and export. İzmir, Türkiye.</p>
+        <p class="ar">إنتاج وتصدير الحجر الطبيعي التركي. إزمير، تركيا.</p>
+      </div>
+      <div>
+        <h4><span class="tr">İletişim</span><span class="en">Contact</span><span class="ar">التواصل</span></h4>
+        <p>Konak, İzmir — Türkiye</p>
+        <p><a href="https://www.facebook.com/dalilmermer/" target="_blank" rel="noopener">facebook.com/dalilmermer</a></p>
+        <p class="tr" style="color:var(--ph)">Telefon ve e-posta eklenecek</p>
+        <p class="en" style="color:var(--ph)">Phone and e-mail to be added</p>
+        <p class="ar" style="color:var(--ph)">سيُضاف الهاتف والبريد الإلكتروني</p>
+      </div>
+      <div>
+        <h4><span class="tr">Diller</span><span class="en">Languages</span><span class="ar">اللغات</span></h4>
+        <p class="tr">Türkçe · İngilizce · Arapça</p>
+        <p class="en">Turkish · English · Arabic</p>
+        <p class="ar">التركية · الإنجليزية · العربية</p>
+      </div>
+    </div>
+    <div class="credit">
+      <p class="tr">Hazırlayan: <strong>Yusuf Kemal Pınarcı</strong> · <a href="tel:+905519556453">+90 551 955 64 53</a></p>
+      <p class="en">Prepared by: <strong>Yusuf Kemal Pınarcı</strong> · <a href="tel:+905519556453">+90 551 955 64 53</a></p>
+      <p class="ar">أعدّه: <strong>Yusuf Kemal Pınarcı</strong> · <a href="tel:+905519556453">+90 551 955 64 53</a></p>
+      <p class="tr">Düzeltmek veya eklemek istediğiniz yerleri iletmeniz yeterli — düzenleyip canlıya alabiliriz.</p>
+      <p class="en">Tell us what you would change or add and we can revise it and take it live.</p>
+      <p class="ar">يكفي أن تخبرونا بما تودّون تعديله أو إضافته، لنجري التعديل وننشره.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Placeholder product cards — clearly generic Turkish stone categories,
+     labelled as layout examples. No invented Dalil Mermer product names. */
+  var PRODUCTS = [
+    {tr:"Beyaz Mermer", en:"White Marble", ar:"رخام أبيض", c1:"#F3F1EC", c2:"#D8D4CC"},
+    {tr:"Bej Mermer",   en:"Beige Marble", ar:"رخام بيج",  c1:"#EDE2CC", c2:"#CDB994"},
+    {tr:"Gri Mermer",   en:"Grey Marble",  ar:"رخام رمادي", c1:"#D6D5D2", c2:"#A5A4A1"},
+    {tr:"Traverten",    en:"Travertine",   ar:"ترافرتين",  c1:"#E5D7BF", c2:"#C3AC89"},
+    {tr:"Siyah Mermer", en:"Black Marble", ar:"رخام أسود", c1:"#4B4A47", c2:"#25241F"},
+    {tr:"Emperador",    en:"Emperador",    ar:"إمبرادور",  c1:"#8E7358", c2:"#5E4835"}
+  ];
+
+  var grid = document.getElementById("prodgrid"),
+      sel  = document.getElementById("q4");
+
+  PRODUCTS.forEach(function(p){
+    var d = document.createElement("div");
+    d.className = "prod";
+    d.innerHTML =
+      '<div class="swatch" style="background:linear-gradient(135deg,'+p.c1+' 0%,'+p.c2+' 100%)"></div>'+
+      '<div class="pb">'+
+        '<h3><span class="tr">'+p.tr+'</span><span class="en">'+p.en+'</span><span class="ar">'+p.ar+'</span></h3>'+
+        '<div class="ptype">'+
+          '<span class="tr">Örnek yerleşim</span>'+
+          '<span class="en">Layout example</span>'+
+          '<span class="ar">نموذج تنسيق</span>'+
+        '</div>'+
+      '</div>';
+    grid.appendChild(d);
+
+    var o = document.createElement("option");
+    o.setAttribute("data-tr", p.tr);
+    o.setAttribute("data-en", p.en);
+    o.setAttribute("data-ar", p.ar);
+    o.textContent = p.tr;
+    sel.appendChild(o);
+  });
+
+  /* ---------- calculator (same verified maths as the Bandırma demo) ---------- */
+  var KERF = 5, RECOVERY = 0.85, CRATE = 1.08;
+  var elMat = document.getElementById("mat"),
+      elTh  = document.getElementById("th"),
+      elQty = document.getElementById("qty"),
+      elPay = document.getElementById("pay"),
+      oKg = document.getElementById("o-kg"),
+      oTon = document.getElementById("o-ton"),
+      oCnt = document.getElementById("o-cnt"),
+      oBlk = document.getElementById("o-blk"),
+      oVer = document.getElementById("o-verdict");
+
+  function locale(){
+    var l = document.documentElement.getAttribute("data-lang");
+    /* Latin digits in Arabic too: traders read spec sheets in Western numerals */
+    return l === "tr" ? "tr-TR" : (l === "ar" ? "ar-u-nu-latn" : "en-US");
+  }
+  function nf(v, d){
+    return v.toLocaleString(locale(), {minimumFractionDigits:d, maximumFractionDigits:d});
+  }
+
+  function calc(){
+    var dens = parseFloat(elMat.value), t = parseFloat(elTh.value),
+        qty = parseFloat(elQty.value), pay = parseFloat(elPay.value);
+
+    if (!(dens > 0) || !(t > 0) || !(qty > 0) || !(pay > 0)) {
+      oKg.textContent = oTon.textContent = oCnt.textContent = oBlk.textContent = "—";
+      oVer.className = "verdict warn";
+      oVer.innerHTML =
+        '<b><span class="tr">Eksik değer</span><span class="en">Missing value</span><span class="ar">قيمة ناقصة</span></b>'+
+        '<span class="tr">Tüm alanları sıfırdan büyük girin.</span>'+
+        '<span class="en">Please enter values greater than zero.</span>'+
+        '<span class="ar">يرجى إدخال قيم أكبر من الصفر.</span>';
+      return;
+    }
+
+    var kgM2 = t * dens * 10,
+        totKg = qty * kgM2 * CRATE,
+        perCnt = (pay * 1000) / (kgM2 * CRATE),
+        cnt = Math.ceil(totKg / (pay * 1000)),
+        yieldM2 = (1000 / (t * 10 + KERF)) * RECOVERY,
+        blockM3 = qty / yieldM2;
+
+    oKg.textContent = nf(kgM2, 1);
+    oTon.textContent = nf(totKg / 1000, 1);
+    oCnt.textContent = nf(cnt, 0);
+    oBlk.textContent = nf(blockM3, 1);
+
+    var per = nf(perCnt, 0), y = nf(yieldM2, 1);
+
+    if (cnt <= 6) {
+      oVer.className = "verdict ok";
+      oVer.innerHTML =
+        '<b><span class="tr">'+cnt+' konteynerlik sevkiyat</span>'+
+        '<span class="en">'+cnt+'-container shipment</span>'+
+        '<span class="ar">شحنة من '+cnt+' حاوية</span></b>'+
+        '<span class="tr">Konteyner başına yaklaşık <strong>'+per+' m²</strong>. Blok verimi ≈ '+y+' m²/m³.</span>'+
+        '<span class="en">About <strong>'+per+' m²</strong> per container. Block yield ≈ '+y+' m²/m³.</span>'+
+        '<span class="ar">نحو <strong>'+per+' م²</strong> لكل حاوية. مردود الكتلة ≈ '+y+' م²/م³.</span>';
+    } else {
+      oVer.className = "verdict warn";
+      oVer.innerHTML =
+        '<b><span class="tr">Proje ölçeğinde sevkiyat — '+cnt+' konteyner</span>'+
+        '<span class="en">Project-scale shipment — '+cnt+' containers</span>'+
+        '<span class="ar">شحنة بحجم مشروع — '+cnt+' حاوية</span></b>'+
+        '<span class="tr">Bu hacim için üretim planlaması ve partili sevkiyat gerekir. Konteyner başına ≈ '+per+' m².</span>'+
+        '<span class="en">This volume needs production planning and staged shipments. About '+per+' m² per container.</span>'+
+        '<span class="ar">يتطلب هذا الحجم تخطيطاً للإنتاج وشحنات على دفعات. نحو '+per+' م² لكل حاوية.</span>';
+    }
+  }
+
+  [elMat, elTh, elQty, elPay].forEach(function(e){
+    e.addEventListener("input", calc);
+    e.addEventListener("change", calc);
+  });
+
+  /* ---------- language cycle: TR -> EN -> AR ---------- */
+  var ORDER = ["tr", "en", "ar"], NEXT = {tr:"EN", en:"AR", ar:"TR"};
+  var langBtn = document.getElementById("lang");
+
+  function applyLang(l){
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.setAttribute("lang", l);
+    document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    langBtn.textContent = NEXT[l];
+    var attr = "data-" + l;
+    Array.prototype.forEach.call(document.querySelectorAll("option[data-tr]"), function(o){
+      var v = o.getAttribute(attr);
+      if (v) o.textContent = v;
+    });
+    calc();
+  }
+  langBtn.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-lang");
+    applyLang(ORDER[(ORDER.indexOf(cur) + 1) % ORDER.length]);
+  });
+
+  /* ---------- theme ---------- */
+  document.getElementById("theme").addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme"), isDark;
+    if (cur === "dark") isDark = true;
+    else if (cur === "light") isDark = false;
+    else isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  /* ---------- inactive form ---------- */
+  document.getElementById("send").addEventListener("click", function(){
+    var l = document.documentElement.getAttribute("data-lang");
+    alert(l === "tr" ? "Bu form tasarım önerisinde bilerek pasif bırakılmıştır."
+        : l === "ar" ? "هذا النموذج معطّل عمداً في المقترح."
+        : "This form is intentionally inactive in the proposal.");
+  });
+
+  applyLang("tr");
+})();
+</script>
+</body>
+</html>
